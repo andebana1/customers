@@ -1,0 +1,123 @@
+<!-- <span>{{ searchTerm$ | async }}</span> -->
+<div class="table-container p-2">
+  <div class="search-and-add pb-2">
+    <label
+      for="table-complete-search"
+      class="col-xs-3 col-sm-auto col-form-label"
+      >Search (First or Last name and Status):</label
+    >
+    <button
+      type="button"
+      class="btn btn-primary icon-button"
+      (click)="openSaveCustomerModal()"
+    >
+      <bi class="icon-button text-white" name="plus"></bi> Add
+    </button>
+  </div>
+  <div class="col-xs-3 col-sm-auto">
+    <input
+      id="table-complete-search"
+      type="text"
+      class="form-control"
+      name="searchTerm"
+      (keyup)="searchCustomers($event)"
+    />
+  </div>
+  <!-- <span class="col col-form-label" *ngIf="tableService.loading$ | async"
+    >Loading...</span
+  > -->
+  <table class="table table-striped table-borderless" *ngIf="(customers$ | async)?.length">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th sortable="firstName" (sort)="onSort($event)" scope="col">
+        <!-- <th sortable="firstName" scope="col"> -->
+          First Name
+        </th>
+        <th sortable="lastName" (sort)="onSort($event)" scope="col">
+        <!-- <th sortable="lastName" scope="col"> -->
+          Last Name
+        </th>
+        <th scope="col">Email</th>
+        <th sortable="status" (sort)="onSort($event)" scope="col">Status</th>
+        <!-- <th sortable="status" scope="col">Status</th> -->
+        <th scope="col">Phone</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers$ | async" class="rounded">
+        <th scope="row" class="rounded-start text-truncate">
+          {{ customer.id }}
+        </th>
+        <td class="text-truncate">
+          <ngb-highlight
+            [result]="customer.firstName"
+            [term]="(searchTerm$ | async)!"
+          ></ngb-highlight>
+        </td>
+        <td class="text-truncate">
+          <ngb-highlight
+            [result]="customer.lastName"
+            [term]="(searchTerm$ | async)!"
+          ></ngb-highlight>
+        </td>
+        <td class="text-truncate">{{ customer.email }}</td>
+        <td class="text-truncate">
+          <span [ngClass]="customer.status">
+            <ngb-highlight
+              [result]="customer.status"
+              [term]="(searchTerm$ | async)!"
+            ></ngb-highlight>
+          </span>
+        </td>
+        <td class="text-truncate">{{ customer.phone }}</td>
+        <td class="rounded-end">
+          <div class="action-buttons">
+            <button
+              type="button"
+              class="btn btn-link"
+              (click)="openSaveCustomerModal(customer.id)"
+            >
+              <bi class="icon-button" name="pencil"></bi>
+            </button>
+            <ng-template #popContent>
+              <button
+                type="button"
+                class="btn btn-link px-2"
+                *ngIf="customer.status === customerStatus.PENDING"
+                (click)="changeStatus(customerStatus.ACTIVE, customer)"
+              >
+                <bi class="icon-button" name="check-lg"></bi>
+              </button>
+              <button
+                type="button"
+                class="btn btn-link px-2"
+                *ngIf="customer.status === customerStatus.PENDING"
+                (click)="changeStatus(customerStatus.INACTIVE, customer)"
+              >
+                <bi class="icon-button" name="x-lg"></bi>
+              </button>
+              <button
+                type="button"
+                class="btn btn-link px-2"
+                (click)="removeItem(customer.id)"
+              >
+                <bi class="icon-button" name="trash"></bi>
+              </button>
+            </ng-template>
+            <button
+              type="button"
+              class="btn btn-link"
+              popoverTitle="Actions"
+              [autoClose]="'outside'"
+              [ngbPopover]="popContent"
+            >
+              <bi class="icon-button" name="three-dots-vertical"></bi>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

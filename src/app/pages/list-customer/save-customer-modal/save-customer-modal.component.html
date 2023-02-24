@@ -1,0 +1,96 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Save Customer</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-describedby="modal-title"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="customerForm">
+    <div class="form-group pb-3">
+      <label for="firstNameInput">First Name <span class="text-danger">*</span></label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="firstNameInput" 
+        formControlName="firstName" 
+        placeholder="First Name (required)"
+      >
+      <div class="invalid-feedback">
+        This field is required.
+      </div>
+    </div>
+    <div class="form-group pb-3">
+      <label for="lastNameInput">Last Name <span class="text-danger">*</span></label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="lastNameInput" 
+        formControlName="lastName" 
+        placeholder="Last Name (required)"
+      >
+      <div class="invalid-feedback">
+        This field is required.
+      </div>
+    </div>
+    <div class="form-group pb-3">
+      <label for="emailInput">Email address <span class="text-danger">*</span></label>
+      <input 
+        type="email" 
+        class="form-control" 
+        id="emailInput" 
+        formControlName="email" 
+        placeholder="Enter a valid email (required)"
+      >
+      <div class="invalid-feedback">
+        This field is required.
+      </div>
+    </div>
+    <div class="form-group pb-3" *ngIf="!customerId">
+      <div ngbDropdown>
+        <button 
+          type="button" 
+          class="btn btn btn-outline-dark" 
+          id="dropStatus" 
+          ngbDropdownToggle
+        >
+          {{ customerForm.get('status')?.value ? customerForm.get('status')?.value : 'Status' }}
+           <span *ngIf="!customerForm.get('status')?.value" class="text-danger">*</span>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropStatus">
+          <button 
+            ngbDropdownItem 
+            (click)="setStatusOption(status.value)" 
+            *ngFor="let status of customerStatus | keyvalue"> 
+              {{ status.value }} 
+            </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-group pb-3">
+        <label for="phoneInput">Phone</label>
+        <input type="tel" class="form-control" id="phoneInput" formControlName="phone" placeholder="Phone">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button 
+    type="button" 
+    class="btn btn-outline-secondary" 
+    (click)="modal.dismiss()"
+  >
+    Cancel
+  </button>
+  <button
+    type="button" 
+    class="btn btn-danger" 
+    [disabled]="!customerForm.valid" 
+    (click)="saveCustomer()"
+  >
+    Save
+  </button>
+</div>

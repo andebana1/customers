@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+bi {
+  height: 20px;
+  width: 20px;
+  margin: auto;
+  color: black;
+}
+
+.pending {
+  color: #e49952 !important;
+}
+
+.active {
+  color: #2ba45c !important;
+}
+
+.inactive {
+  color: #ce1616 !important;
+}
+
+.icon-button {
+  display: flex;
+  flex-direction: row;
+}
