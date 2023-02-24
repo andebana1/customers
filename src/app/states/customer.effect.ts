@@ -11,7 +11,6 @@ export class CustomerEffects {
     private actions$: Actions,
     private customerService: CustomerService,
   ) {
-    console.log('effect injected')
   }
 
   loadCustomers$ = createEffect(() => this.actions$.pipe(

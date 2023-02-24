@@ -1,4 +1,3 @@
-<!-- <span>{{ searchTerm$ | async }}</span> -->
 <div class="table-container p-2">
   <div class="search-and-add pb-2">
     <label
@@ -21,26 +20,30 @@
       class="form-control"
       name="searchTerm"
       (keyup)="searchCustomers($event)"
+      [disabled]="!(customers$ | async)?.length"
     />
   </div>
-  <!-- <span class="col col-form-label" *ngIf="tableService.loading$ | async"
-    >Loading...</span
-  > -->
-  <table class="table table-striped table-borderless" *ngIf="(customers$ | async)?.length">
+  <div class="card" *ngIf="!(customers$ | async)?.length">
+    <div class="centered-image">
+      <img class="card-img-top" src="https://app.lssquare.com/static/media/empty_product_banner.c076afe7.png" alt="Card image cap">
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">No items available</h5>
+      <p class="card-text">It seems like you have no customers. Click on the "+Add" button on the top rigth at add more items.</p>
+    </div>
+  </div>
+  <table id="costumerTable" class="table table-striped table-borderless" *ngIf="(customers$ | async)?.length">
     <thead>
       <tr>
         <th scope="col">Id</th>
         <th sortable="firstName" (sort)="onSort($event)" scope="col">
-        <!-- <th sortable="firstName" scope="col"> -->
           First Name
         </th>
         <th sortable="lastName" (sort)="onSort($event)" scope="col">
-        <!-- <th sortable="lastName" scope="col"> -->
           Last Name
         </th>
         <th scope="col">Email</th>
         <th sortable="status" (sort)="onSort($event)" scope="col">Status</th>
-        <!-- <th sortable="status" scope="col">Status</th> -->
         <th scope="col">Phone</th>
         <th scope="col">Actions</th>
       </tr>

@@ -5,6 +5,7 @@ import { get, set, remove } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { Observable, of } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
+import { Customer } from '@models/customer.model';
 
 
 @Injectable({
@@ -36,8 +37,11 @@ export abstract class RepositoryService<T> {
   public save(model: T) {
     let models: Array<T> = this.findAll();
     if (!get(model, 'id')) {
-      set(model as any, 'id', uuid());
-      models.unshift(model);
+      const newModel: T = {
+        ...model,
+        id: uuid(),
+      }
+      models.unshift(newModel);
       this.storageService.saveItem({ key: this.modelStorageLabel, data: models });
       return;
     }

@@ -14,7 +14,7 @@ import { saveCustomerModalAction } from '@states/customer.actions';
 export class SaveCustomerModalComponent implements OnInit {
   public customerStatus = StatusEnum;
   public customerForm!: FormGroup;
-  private customer?: Customer;
+  public customer?: Customer;
 
   @Input() public customerId?: string;
 
@@ -28,11 +28,11 @@ export class SaveCustomerModalComponent implements OnInit {
     if (this.customerId) {
       this.customer = this.customerService.findOneById(this.customerId);
     }
-    this.initForm();
+    this.customerForm = this.initForm();
   }
 
-  private initForm(): void {
-    this.customerForm = new FormGroup({
+  public initForm(): FormGroup {
+     return new FormGroup({
       firstName: new FormControl(
         this.customer?.firstName ?? '', [
         Validators.required,

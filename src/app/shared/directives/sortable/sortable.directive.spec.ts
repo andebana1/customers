@@ -1,8 +1,8 @@
-import { SortableDirective } from './sortable.directive';
+import { NgbdSortableHeaderDirective } from "./sortable.directive";
 
 describe('SortableDirective', () => {
   it('should create an instance', () => {
-    const directive = new SortableDirective();
+    const directive = new NgbdSortableHeaderDirective();
     expect(directive).toBeTruthy();
   });
 });

@@ -23,7 +23,6 @@ export class ListCustomerComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private customerService: CustomerService,
     private modalService: NgbModal,
   ) {
   }
@@ -49,7 +48,6 @@ export class ListCustomerComponent implements OnInit {
   }
 
   onSort({ column, direction }: SortEvent) {
-    // resetting other headers
     this.headers.forEach((header) => {
       if (header.sortable !== column) {
         header.direction = '';

@@ -1,6 +1,8 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
+const { LOG_DEBUG } = require('karma/lib/constants');
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -13,6 +15,11 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
+      captureConsole: true,
+      mocha: {
+        bail: true
+      },
+      logLevel: LOG_DEBUG,
       jasmine: {
         // you can add configuration options for Jasmine here
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
