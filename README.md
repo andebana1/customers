@@ -1,27 +1,24 @@
-# Customer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
+# Customers List
 
-## Development server
+Some infos about the project:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* Angular v14
+* Bootstrap 5 (ng-bootstrap 13 and ng-bootstrap-icons 13 for icons)
+* NgRX v14
 
-## Code scaffolding
+# Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Node.JS (min v14)
 
-## Build
+# Instructions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* ```npm i (or npm install) ```
 
-## Running unit tests
+* ``` ng serve --open ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* ``` ng test --no-watch --code-coverage ```
 
-## Running end-to-end tests
+# Notes
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* If the test fails on the first try, try it again one second time. Sometimes it fails on the first run.

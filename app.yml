@@ -1,0 +1,14 @@
+runtime: 
+
+instance_class:
+
+env_variables: 
+  BUCKET_NAME: 
+
+handlers:
+- url: /
+  static_files: 
+  upload: 
+
+- url: /
+  static_dir: 
